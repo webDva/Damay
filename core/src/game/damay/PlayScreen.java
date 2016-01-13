@@ -89,10 +89,6 @@ public class PlayScreen implements Screen {
 		initialTime = TimeUtils.millis();
 	}
 
-	public long getSecondsPassed() {
-		return TimeUtils.timeSinceMillis(initialTime) / 1000;
-	}
-
 	public void changeSelection(int i, Panty p) {
 		if (!(tapAttempts >= 2)) {
 			tapAttempts++;
@@ -112,8 +108,8 @@ public class PlayScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		seconds += getSecondsPassed();
-		if ((seconds >= 1)) {
+		seconds += TimeUtils.millis() * 1000;
+		if ((seconds >= 1000)) {
 			for (int h = 0; h < 2; h++) {
 				int i, j;
 				i = MathUtils.random(rows - 1);
