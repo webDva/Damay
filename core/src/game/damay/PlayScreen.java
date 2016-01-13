@@ -62,7 +62,7 @@ public class PlayScreen implements Screen {
 		Gdx.input.setInputProcessor(stage);
 
 		Table table = new Table();
-		table.setPosition(48 * columns + 20, 15);
+		table.setPosition(48 * columns + 80, 30);
 		stage.addActor(table);
 
 		// table.setDebug(true);
@@ -105,7 +105,7 @@ public class PlayScreen implements Screen {
 					i = MathUtils.random(rows - 1);
 					j = MathUtils.random(columns - 1);
 
-					while (panties[i][j] == selectedPanties[0] && panties[i][j] == selectedPanties[1]) {
+					while (panties[i][j] == selectedPanties[0] || panties[i][j] == selectedPanties[1]) {
 						i = MathUtils.random(rows - 1);
 						j = MathUtils.random(columns - 1);
 					}
