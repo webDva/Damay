@@ -111,8 +111,10 @@ public class PlayScreen implements Screen {
 				for (Panty p : selectedPanties) {
 					for (int i = 0; i < rows; i++) {
 						for (int j = 0; j < columns; j++) {
-							if (panties[i][j].equals(p)) {
+							if (panties[i][j] == p) {
+								panties[i][j].remove();
 								panties[i][j] = new Panty(MathUtils.random(1, ASSETS_CREATED), new Vector2(i * PANTY_AREA, j * PANTY_AREA), this);
+								stage.addActor(panties[i][j]);
 							}
 						}
 					}
