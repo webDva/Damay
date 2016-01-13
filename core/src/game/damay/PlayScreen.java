@@ -30,7 +30,7 @@ public class PlayScreen implements Screen {
 	private int tapAttempts = 0;
 	private Panty selectedPanties[];
 
-	private Sound positive, negative;
+	private Sound hit_sound, miss_sound;
 
 	private Panty[][] panties;
 	private int rows, columns;
@@ -65,8 +65,8 @@ public class PlayScreen implements Screen {
 		// table.add(label1);
 
 		/* Load sound */
-		positive = Gdx.audio.newSound(Gdx.files.internal("audio/positive.wav"));
-		negative = Gdx.audio.newSound(Gdx.files.internal("audio/negative.wav"));
+		hit_sound = Gdx.audio.newSound(Gdx.files.internal("audio/hit.wav"));
+		miss_sound = Gdx.audio.newSound(Gdx.files.internal("audio/miss2.wav"));
 
 		/* Create 2D array of actors */
 		rows = 5;
@@ -105,7 +105,7 @@ public class PlayScreen implements Screen {
 	public void render(float delta) {
 		if (tapAttempts == 2) {
 			if (selectedPanties[0].pantyNumber == selectedPanties[1].pantyNumber && selectedPanties[0] != selectedPanties[1]) {
-				positive.play();
+				hit_sound.play();
 
 				/* remove the panties and replace them */
 				for (Panty p : selectedPanties) {
@@ -120,7 +120,7 @@ public class PlayScreen implements Screen {
 					}
 				}
 			} else {
-				negative.play();
+				miss_sound.play();
 			}
 			tapAttempts = 0;
 		}
