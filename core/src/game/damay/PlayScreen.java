@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
@@ -24,6 +23,8 @@ public class PlayScreen implements Screen {
 
 	private Stage stage;
 	private Skin skin;
+
+	public int selections[];
 
 	public PlayScreen(SpriteBatch batch) {
 		this.batch = batch;
@@ -62,10 +63,12 @@ public class PlayScreen implements Screen {
 
 		for (int i = 0; i < rows; ++i) {
 			for (int j = 0; j < columns; ++j) {
-				panties[i][j] = new Panty(new Texture(Gdx.files.internal("panty" + MathUtils.random(1, 2) + ".png")), new Vector2(i * PANTY_AREA, j * PANTY_AREA));
+				panties[i][j] = new Panty(MathUtils.random(1, 2), new Vector2(i * PANTY_AREA, j * PANTY_AREA));
 				stage.addActor(panties[i][j]);
 			}
 		}
+
+		selections = new int[2];
 	}
 
 	@Override

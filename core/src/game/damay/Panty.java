@@ -1,5 +1,6 @@
 package game.damay;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -11,9 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 public class Panty extends Actor {
 	public Texture texture;
 	public Vector2 positon;
+	public int pantyNumber;
 
-	public Panty(Texture texture, Vector2 position) {
-		this.texture = texture;
+	public Panty(int pantyNumber, Vector2 position) {
+		this.pantyNumber = pantyNumber;
+		this.texture = new Texture(Gdx.files.internal("panty" + pantyNumber + ".png"));
 		this.positon = position;
 		setBounds(position.x, position.y, texture.getWidth(), texture.getHeight());
 
