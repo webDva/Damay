@@ -81,7 +81,7 @@ public class EndScreen implements Screen {
 
 		batch.setProjectionMatrix(camera.combined);
 
-		scoreLabel.setText(matches + " matches in 60 seconds");
+		scoreLabel.setText(matches + " matches in 45 seconds");
 
 		stage.act();
 		stage.draw();
