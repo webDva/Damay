@@ -13,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class PlayScreen implements Screen {
@@ -37,7 +39,6 @@ public class PlayScreen implements Screen {
 	private int rows, columns;
 
 	private long initialTime;
-	private long seconds = 0;
 
 	public PlayScreen(SpriteBatch batch) {
 		this.batch = batch;
@@ -86,6 +87,27 @@ public class PlayScreen implements Screen {
 			}
 		}
 
+		Timer.schedule(new Task() {
+
+			@Override
+			public void run() {
+				for (int h = 0; h < 2; h++) {
+					int i, j;
+					i = MathUtils.random(rows - 1);
+					j = MathUtils.random(columns - 1);
+
+					while (panties[i][j] == selectedPanties[0] && panties[i][j] == selectedPanties[1]) {
+						i = MathUtils.random(rows - 1);
+						j = MathUtils.random(columns - 1);
+					}
+
+					panties[i][j].remove();
+					panties[i][j] = new Panty(MathUtils.random(1, ASSETS_CREATED), new Vector2(i * PANTY_AREA, j * PANTY_AREA), PlayScreen.this);
+					stage.addActor(panties[i][j]);
+				}
+			}
+		}, 0, 1);
+
 		initialTime = TimeUtils.millis();
 	}
 
@@ -108,25 +130,6 @@ public class PlayScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		seconds += TimeUtils.millis() * 1000;
-		if ((seconds >= 1000)) {
-			for (int h = 0; h < 2; h++) {
-				int i, j;
-				i = MathUtils.random(rows - 1);
-				j = MathUtils.random(columns - 1);
-
-				while (panties[i][j] == selectedPanties[0] && panties[i][j] == selectedPanties[1]) {
-					i = MathUtils.random(rows - 1);
-					j = MathUtils.random(columns - 1);
-				}
-
-				panties[i][j].remove();
-				panties[i][j] = new Panty(MathUtils.random(1, ASSETS_CREATED), new Vector2(i * PANTY_AREA, j * PANTY_AREA), this);
-				stage.addActor(panties[i][j]);
-			}
-
-			seconds = 0;
-		}
 
 		if (tapAttempts == 2) {
 			if (selectedPanties[0].pantyNumber == selectedPanties[1].pantyNumber && selectedPanties[0] != selectedPanties[1]) {
