@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -55,10 +54,9 @@ public class EndScreen implements Screen {
 		LabelStyle labelStyle = new LabelStyle(skin.getFont("my_font"), skin.getFont("my_font").getColor());
 		scoreLabel = new Label("Score", labelStyle);
 
-		skin.add("panty_image", new Texture(Gdx.files.internal("panty" + MathUtils.random(1, PlayScreen.ASSETS_CREATED) + ".png")));
+		skin.add("retry", new Texture(Gdx.files.internal("retry_back.png")));
 
-		TextButtonStyle buttonStyle = new TextButtonStyle(skin.getDrawable("panty_image"), skin.getDrawable("panty_image"), skin.getDrawable("panty_image"),
-				skin.getFont("my_font"));
+		TextButtonStyle buttonStyle = new TextButtonStyle(skin.getDrawable("retry"), skin.getDrawable("retry"), skin.getDrawable("retry"), skin.getFont("my_font"));
 		final TextButton button = new TextButton("Retry", buttonStyle);
 
 		button.addListener(new ChangeListener() {
