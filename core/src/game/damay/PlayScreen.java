@@ -116,12 +116,12 @@ public class PlayScreen implements Screen {
 		if ((seconds >= 1)) {
 			for (int h = 0; h < 2; h++) {
 				int i, j;
-				i = MathUtils.random(rows);
-				j = MathUtils.random(columns);
+				i = MathUtils.random(rows - 1);
+				j = MathUtils.random(columns - 1);
 
 				while (panties[i][j] == selectedPanties[0] && panties[i][j] == selectedPanties[1]) {
-					i = MathUtils.random(rows);
-					j = MathUtils.random(columns);
+					i = MathUtils.random(rows - 1);
+					j = MathUtils.random(columns - 1);
 				}
 
 				panties[i][j].remove();
