@@ -23,7 +23,7 @@ public class Panty extends Actor {
 		addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				screen.changeSelection(Panty.this.pantyNumber);
+				screen.changeSelection(Panty.this.pantyNumber, Panty.this);
 
 				return true;
 			}

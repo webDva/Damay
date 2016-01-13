@@ -25,6 +25,8 @@ public class PlayScreen implements Screen {
 	private Skin skin;
 
 	public int selections[];
+	private int tapAttempts = 0;
+	private Panty selectedPanties[];
 
 	public PlayScreen(SpriteBatch batch) {
 		this.batch = batch;
@@ -71,12 +73,33 @@ public class PlayScreen implements Screen {
 
 	}
 
-	public void changeSelection(int i) {
-		this.selections[1] = i;
+	public void changeSelection(int i, Panty p) {
+		if (!(tapAttempts >= 2)) {
+			tapAttempts++;
+		} else {
+			tapAttempts = 0;
+		}
+
+		if (tapAttempts == 1)
+			this.selections[0] = i;
+		else if (tapAttempts == 2)
+			this.selections[1] = i;
+
+		if (tapAttempts != 0) {
+			selectedPanties[tapAttempts - 1] = p;
+		}
 	}
 
 	@Override
 	public void render(float delta) {
+		if (tapAttempts == 2) {
+			if (selectedPanties[0].pantyNumber == selectedPanties[1].pantyNumber) {
+				Gdx.app.log("PANTIES", "MATCH");
+			} else {
+				Gdx.app.log("PANTIES", "NO MATCH");
+			}
+		}
+
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
