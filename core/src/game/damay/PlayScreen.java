@@ -43,6 +43,7 @@ public class PlayScreen implements Screen {
 	private Panty[][] panties;
 
 	private long initialTime;
+	private Label timeLabel;
 
 	public PlayScreen(SpriteBatch batch) {
 		this.batch = batch;
@@ -69,9 +70,9 @@ public class PlayScreen implements Screen {
 		skin.add("my_font", new BitmapFont(), BitmapFont.class);
 
 		LabelStyle labelStyle = new LabelStyle(skin.getFont("my_font"), skin.getFont("my_font").getColor());
-		Label label1 = new Label("Time", labelStyle);
+		timeLabel = new Label("Time", labelStyle);
 
-		table.add(label1);
+		table.add(timeLabel);
 
 		/* Load sound */
 		hit_sound = Gdx.audio.newSound(Gdx.files.internal("audio/hit.wav"));
@@ -90,7 +91,6 @@ public class PlayScreen implements Screen {
 		}
 
 		Timer.schedule(new Task() {
-
 			@Override
 			public void run() {
 				for (int h = 0; h < 2; h++) {
@@ -132,6 +132,7 @@ public class PlayScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
+		timeLabel.setText("Time " + (60 - TimeUtils.timeSinceMillis(initialTime) / 1000));
 
 		if (tapAttempts == 2) {
 			if (selectedPanties[0].pantyNumber == selectedPanties[1].pantyNumber && selectedPanties[0] != selectedPanties[1]) {
