@@ -59,7 +59,7 @@ public class PlayScreen implements Screen {
 		Gdx.input.setInputProcessor(stage);
 
 		Table table = new Table();
-		table.setPosition(60 * columns, 70);
+		table.setPosition(48 * columns + 20, 70);
 		stage.addActor(table);
 
 		table.setDebug(true);
