@@ -115,7 +115,7 @@ public class PlayScreen implements Screen {
 					stage.addActor(panties[i][j]);
 				}
 			}
-		}, 0, 1);
+		}, 0, 3 / 4f);
 
 		initialTime = TimeUtils.millis();
 	}
