@@ -99,6 +99,7 @@ public class PlayScreen implements Screen {
 			} else {
 				Gdx.app.log("PANTIES", "NO MATCH");
 			}
+			tapAttempts = 0;
 		}
 
 		Gdx.gl.glClearColor(0, 0, 0, 1);
