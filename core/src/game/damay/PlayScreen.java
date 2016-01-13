@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class PlayScreen implements Screen {
@@ -34,6 +35,9 @@ public class PlayScreen implements Screen {
 
 	private Panty[][] panties;
 	private int rows, columns;
+
+	private long initialTime;
+	private long seconds = 0;
 
 	public PlayScreen(SpriteBatch batch) {
 		this.batch = batch;
@@ -82,6 +86,11 @@ public class PlayScreen implements Screen {
 			}
 		}
 
+		initialTime = TimeUtils.millis();
+	}
+
+	public long getSecondsPassed() {
+		return TimeUtils.timeSinceMillis(initialTime) / 1000;
 	}
 
 	public void changeSelection(int i, Panty p) {
@@ -103,6 +112,26 @@ public class PlayScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
+		seconds += getSecondsPassed();
+		if ((seconds >= 1)) {
+			for (int h = 0; h < 2; h++) {
+				int i, j;
+				i = MathUtils.random(rows);
+				j = MathUtils.random(columns);
+
+				while (panties[i][j] == selectedPanties[0] && panties[i][j] == selectedPanties[1]) {
+					i = MathUtils.random(rows);
+					j = MathUtils.random(columns);
+				}
+
+				panties[i][j].remove();
+				panties[i][j] = new Panty(MathUtils.random(1, ASSETS_CREATED), new Vector2(i * PANTY_AREA, j * PANTY_AREA), this);
+				stage.addActor(panties[i][j]);
+			}
+
+			seconds = 0;
+		}
+
 		if (tapAttempts == 2) {
 			if (selectedPanties[0].pantyNumber == selectedPanties[1].pantyNumber && selectedPanties[0] != selectedPanties[1]) {
 				hit_sound.play();
