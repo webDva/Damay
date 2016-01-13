@@ -143,11 +143,11 @@ public class PlayScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		if (10 - TimeUtils.timeSinceMillis(initialTime) / 1000 == 0) {
+		if (45 - TimeUtils.timeSinceMillis(initialTime) / 1000 == 0) {
 			g.setScreen(new EndScreen(batch, g, skin, matches));
 		}
 
-		timeLabel.setText("Time " + (10 - TimeUtils.timeSinceMillis(initialTime) / 1000));
+		timeLabel.setText("Time " + (45 - TimeUtils.timeSinceMillis(initialTime) / 1000));
 		scoreLabel.setText("Matches: " + matches);
 
 		if (tapAttempts == 2) {
