@@ -44,6 +44,8 @@ public class PlayScreen implements Screen {
 
 	private long initialTime;
 	private Label timeLabel;
+	private Label scoreLabel;
+	private int matches;
 
 	public PlayScreen(SpriteBatch batch) {
 		this.batch = batch;
@@ -72,6 +74,11 @@ public class PlayScreen implements Screen {
 		LabelStyle labelStyle = new LabelStyle(skin.getFont("my_font"), skin.getFont("my_font").getColor());
 		timeLabel = new Label("Time", labelStyle);
 
+		matches = 0;
+		scoreLabel = new Label("Score", labelStyle);
+
+		table.add(scoreLabel);
+		table.row();
 		table.add(timeLabel);
 
 		/* Load sound */
@@ -133,10 +140,12 @@ public class PlayScreen implements Screen {
 	@Override
 	public void render(float delta) {
 		timeLabel.setText("Time " + (60 - TimeUtils.timeSinceMillis(initialTime) / 1000));
+		scoreLabel.setText("Matches: " + matches);
 
 		if (tapAttempts == 2) {
 			if (selectedPanties[0].pantyNumber == selectedPanties[1].pantyNumber && selectedPanties[0] != selectedPanties[1]) {
 				hit_sound.play();
+				matches += 1;
 
 				/* remove the panties and replace them */
 				for (Panty p : selectedPanties) {
