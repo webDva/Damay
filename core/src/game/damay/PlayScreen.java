@@ -24,8 +24,6 @@ public class PlayScreen implements Screen {
 	private Stage stage;
 	private Skin skin;
 
-	Texture img;
-
 	public PlayScreen(SpriteBatch batch) {
 		this.batch = batch;
 	}
@@ -55,7 +53,18 @@ public class PlayScreen implements Screen {
 
 		table.add(label1);
 
-		img = new Texture(Gdx.files.internal("panty1.png"));
+		/* Create 2D array of actors */
+		int rows, columns;
+		rows = 5;
+		columns = 5;
+		Panty[][] panties = new Panty[rows][columns];
+
+		for (int i = 0; i < rows; ++i) {
+			for (int j = 0; j < columns; ++j) {
+				panties[i][j] = new Panty(new Texture(Gdx.files.internal("panty1.png")));
+				stage.addActor(panties[i][j]);
+			}
+		}
 	}
 
 	@Override
@@ -66,7 +75,6 @@ public class PlayScreen implements Screen {
 		batch.setProjectionMatrix(camera.combined);
 
 		batch.begin();
-		batch.draw(img, 0, 0);
 		batch.end();
 
 		stage.act();
