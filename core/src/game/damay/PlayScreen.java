@@ -7,10 +7,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -48,8 +47,8 @@ public class PlayScreen implements Screen {
 
 		skin.add("my_font", new BitmapFont(), BitmapFont.class);
 
-		LabelStyle labelStyle = new LabelStyle(skin.getFont("my_font"), skin.getFont("my_font").getColor());
-		Label label1 = new Label("AAAAAAAAAAAAAA", labelStyle);
+		// LabelStyle labelStyle = new LabelStyle(skin.getFont("my_font"), skin.getFont("my_font").getColor());
+		// Label label1 = new Label("AAAAAAAAAAAAAA", labelStyle);
 
 		// table.add(label1);
 
@@ -61,7 +60,7 @@ public class PlayScreen implements Screen {
 
 		for (int i = 0; i < rows; ++i) {
 			for (int j = 0; j < columns; ++j) {
-				panties[i][j] = new Panty(new Texture(Gdx.files.internal("panty1.png")), new Vector2(i * 50, j * 50));
+				panties[i][j] = new Panty(new Texture(Gdx.files.internal("panty" + MathUtils.random(1, 2) + ".png")), new Vector2(i * 50, j * 50));
 				stage.addActor(panties[i][j]);
 			}
 		}
