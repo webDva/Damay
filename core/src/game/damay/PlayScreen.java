@@ -1,5 +1,6 @@
 package game.damay;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
@@ -22,7 +23,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 public class PlayScreen implements Screen {
 
 	private static final int PANTY_AREA = 48;
-	private static final int ASSETS_CREATED = 5;
+	private static final int ASSETS_CREATED = 6;
 
 	private static final int rows = 5;
 	private static final int columns = 5;
@@ -47,8 +48,11 @@ public class PlayScreen implements Screen {
 	private Label scoreLabel;
 	private int matches;
 
-	public PlayScreen(SpriteBatch batch) {
+	private Game g;
+
+	public PlayScreen(SpriteBatch batch, Game g) {
 		this.batch = batch;
+		this.g = g;
 	}
 
 	@Override
@@ -139,6 +143,10 @@ public class PlayScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
+		if (60 - TimeUtils.timeSinceMillis(initialTime) / 1000 == 0) {
+			g.setScreen(new EndScreen(batch, g, skin, matches));
+		}
+
 		timeLabel.setText("Time " + (60 - TimeUtils.timeSinceMillis(initialTime) / 1000));
 		scoreLabel.setText("Matches: " + matches);
 
