@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 public class PlayScreen implements Screen {
 
 	private static final int PANTY_AREA = 48;
+	private static final int ASSETS_CREATED = 2;
 
 	private SpriteBatch batch;
 	private OrthographicCamera camera;
@@ -76,7 +77,7 @@ public class PlayScreen implements Screen {
 
 		for (int i = 0; i < rows; ++i) {
 			for (int j = 0; j < columns; ++j) {
-				panties[i][j] = new Panty(MathUtils.random(1, 2), new Vector2(i * PANTY_AREA, j * PANTY_AREA), this);
+				panties[i][j] = new Panty(MathUtils.random(1, ASSETS_CREATED), new Vector2(i * PANTY_AREA, j * PANTY_AREA), this);
 				stage.addActor(panties[i][j]);
 			}
 		}
@@ -107,7 +108,15 @@ public class PlayScreen implements Screen {
 				positive.play();
 
 				/* remove the panties and replace them */
-
+				for (Panty p : selectedPanties) {
+					for (int i = 0; i < rows; i++) {
+						for (int j = 0; j < columns; j++) {
+							if (panties[i][j].equals(p)) {
+								panties[i][j] = new Panty(MathUtils.random(1, ASSETS_CREATED), new Vector2(i * PANTY_AREA, j * PANTY_AREA), this);
+							}
+						}
+					}
+				}
 			} else {
 				negative.play();
 			}
