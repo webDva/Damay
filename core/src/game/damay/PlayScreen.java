@@ -10,8 +10,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -39,7 +42,7 @@ public class PlayScreen implements Screen {
 
 	private Panty[][] panties;
 
-	// private long initialTime;
+	private long initialTime;
 
 	public PlayScreen(SpriteBatch batch) {
 		this.batch = batch;
@@ -65,10 +68,10 @@ public class PlayScreen implements Screen {
 
 		skin.add("my_font", new BitmapFont(), BitmapFont.class);
 
-		// LabelStyle labelStyle = new LabelStyle(skin.getFont("my_font"), skin.getFont("my_font").getColor());
-		// Label label1 = new Label("Time", labelStyle);
+		LabelStyle labelStyle = new LabelStyle(skin.getFont("my_font"), skin.getFont("my_font").getColor());
+		Label label1 = new Label("Time", labelStyle);
 
-		// table.add(label1);
+		table.add(label1);
 
 		/* Load sound */
 		hit_sound = Gdx.audio.newSound(Gdx.files.internal("audio/hit.wav"));
@@ -107,7 +110,7 @@ public class PlayScreen implements Screen {
 			}
 		}, 0, 1);
 
-		// initialTime = TimeUtils.millis();
+		initialTime = TimeUtils.millis();
 	}
 
 	public void changeSelection(int i, Panty p) {
