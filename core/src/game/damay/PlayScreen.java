@@ -66,14 +66,14 @@ public class PlayScreen implements Screen {
 		Gdx.input.setInputProcessor(stage);
 
 		Table table = new Table();
-		table.setPosition(48 * columns + 80, 30);
+		table.setPosition(48 * columns + 80, 40);
 		stage.addActor(table);
 
 		// table.setDebug(true);
 
 		skin = new Skin();
 
-		skin.add("my_font", new BitmapFont(), BitmapFont.class);
+		skin.add("my_font", new BitmapFont(Gdx.files.internal("christy.fnt")), BitmapFont.class);
 
 		LabelStyle labelStyle = new LabelStyle(skin.getFont("my_font"), skin.getFont("my_font").getColor());
 		timeLabel = new Label("Time", labelStyle);

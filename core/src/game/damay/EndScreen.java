@@ -49,7 +49,7 @@ public class EndScreen implements Screen {
 
 		Table table = new Table();
 		stage.addActor(table);
-		table.setPosition(100, 50);
+		table.setPosition(200, 50);
 
 		LabelStyle labelStyle = new LabelStyle(skin.getFont("my_font"), skin.getFont("my_font").getColor());
 		scoreLabel = new Label("Score", labelStyle);
