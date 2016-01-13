@@ -31,6 +31,9 @@ public class PlayScreen implements Screen {
 
 	private Sound positive, negative;
 
+	private Panty[][] panties;
+	private int rows, columns;
+
 	public PlayScreen(SpriteBatch batch) {
 		this.batch = batch;
 	}
@@ -65,10 +68,9 @@ public class PlayScreen implements Screen {
 		negative = Gdx.audio.newSound(Gdx.files.internal("audio/negative.wav"));
 
 		/* Create 2D array of actors */
-		int rows, columns;
 		rows = 5;
 		columns = 5;
-		Panty[][] panties = new Panty[rows][columns];
+		panties = new Panty[rows][columns];
 		selections = new int[2];
 		selectedPanties = new Panty[2];
 
@@ -103,6 +105,9 @@ public class PlayScreen implements Screen {
 		if (tapAttempts == 2) {
 			if (selectedPanties[0].pantyNumber == selectedPanties[1].pantyNumber && selectedPanties[0] != selectedPanties[1]) {
 				positive.play();
+
+				/* remove the panties and replace them */
+
 			} else {
 				negative.play();
 			}
