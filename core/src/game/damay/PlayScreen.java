@@ -59,10 +59,11 @@ public class PlayScreen implements Screen {
 
 		/* Create 2D array of actors */
 		int rows, columns;
-		rows = 2;
-		columns = 2;
+		rows = 5;
+		columns = 5;
 		Panty[][] panties = new Panty[rows][columns];
 		selections = new int[2];
+		selectedPanties = new Panty[2];
 
 		for (int i = 0; i < rows; ++i) {
 			for (int j = 0; j < columns; ++j) {
