@@ -39,7 +39,7 @@ public class PlayScreen implements Screen {
 		Gdx.input.setInputProcessor(stage);
 
 		Table table = new Table();
-		table.setPosition(50, Gdx.graphics.getHeight() - 70);
+		table.setPosition(50, 70);
 		stage.addActor(table);
 
 		table.setDebug(true);
@@ -49,9 +49,9 @@ public class PlayScreen implements Screen {
 		skin.add("my_font", new BitmapFont(), BitmapFont.class);
 
 		LabelStyle labelStyle = new LabelStyle(skin.getFont("my_font"), skin.getFont("my_font").getColor());
-		Label label1 = new Label("Health", labelStyle);
+		Label label1 = new Label("AAAAAAAAAAAAAA", labelStyle);
 
-		table.add(label1);
+		// table.add(label1);
 
 		/* Create 2D array of actors */
 		int rows, columns;
