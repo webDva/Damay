@@ -2,6 +2,7 @@ package game.damay;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -27,6 +28,8 @@ public class PlayScreen implements Screen {
 	public int selections[];
 	private int tapAttempts = 0;
 	private Panty selectedPanties[];
+
+	private Sound positive, negative;
 
 	public PlayScreen(SpriteBatch batch) {
 		this.batch = batch;
@@ -56,6 +59,10 @@ public class PlayScreen implements Screen {
 		// Label label1 = new Label("AAAAAAAAAAAAAA", labelStyle);
 
 		// table.add(label1);
+
+		/* Load sound */
+		positive = Gdx.audio.newSound(Gdx.files.internal("audio/positive.wav"));
+		negative = Gdx.audio.newSound(Gdx.files.internal("audio/negative.wav"));
 
 		/* Create 2D array of actors */
 		int rows, columns;
@@ -95,9 +102,9 @@ public class PlayScreen implements Screen {
 	public void render(float delta) {
 		if (tapAttempts == 2) {
 			if (selectedPanties[0].pantyNumber == selectedPanties[1].pantyNumber) {
-				Gdx.app.log("PANTIES", "MATCH");
+				positive.play();
 			} else {
-				Gdx.app.log("PANTIES", "NO MATCH");
+				negative.play();
 			}
 			tapAttempts = 0;
 		}
