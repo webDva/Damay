@@ -101,7 +101,7 @@ public class PlayScreen implements Screen {
 	@Override
 	public void render(float delta) {
 		if (tapAttempts == 2) {
-			if (selectedPanties[0].pantyNumber == selectedPanties[1].pantyNumber) {
+			if (selectedPanties[0].pantyNumber == selectedPanties[1].pantyNumber && selectedPanties[0] != selectedPanties[1]) {
 				positive.play();
 			} else {
 				negative.play();
