@@ -57,18 +57,22 @@ public class PlayScreen implements Screen {
 
 		/* Create 2D array of actors */
 		int rows, columns;
-		rows = 5;
-		columns = 5;
+		rows = 2;
+		columns = 2;
 		Panty[][] panties = new Panty[rows][columns];
+		selections = new int[2];
 
 		for (int i = 0; i < rows; ++i) {
 			for (int j = 0; j < columns; ++j) {
-				panties[i][j] = new Panty(MathUtils.random(1, 2), new Vector2(i * PANTY_AREA, j * PANTY_AREA));
+				panties[i][j] = new Panty(MathUtils.random(1, 2), new Vector2(i * PANTY_AREA, j * PANTY_AREA), this);
 				stage.addActor(panties[i][j]);
 			}
 		}
 
-		selections = new int[2];
+	}
+
+	public void changeSelection(int i) {
+		this.selections[1] = i;
 	}
 
 	@Override
