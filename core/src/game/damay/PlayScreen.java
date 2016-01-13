@@ -14,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class PlayScreen implements Screen {
 
@@ -36,7 +35,7 @@ public class PlayScreen implements Screen {
 		viewport.apply();
 
 		/* User Interface */
-		stage = new Stage(new ScreenViewport(), batch);
+		stage = new Stage(new FitViewport(800 / 2, 600 / 2, new OrthographicCamera()), batch);
 		Gdx.input.setInputProcessor(stage);
 
 		Table table = new Table();
