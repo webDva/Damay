@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.TimeUtils;
@@ -21,6 +23,9 @@ public class PlayScreen implements Screen {
 
 	private static final int PANTY_AREA = 48;
 	private static final int ASSETS_CREATED = 3;
+
+	private static final int rows = 5;
+	private static final int columns = 5;
 
 	private SpriteBatch batch;
 	private OrthographicCamera camera;
@@ -36,7 +41,6 @@ public class PlayScreen implements Screen {
 	private Sound hit_sound, miss_sound;
 
 	private Panty[][] panties;
-	private int rows, columns;
 
 	private long initialTime;
 
@@ -55,7 +59,7 @@ public class PlayScreen implements Screen {
 		Gdx.input.setInputProcessor(stage);
 
 		Table table = new Table();
-		table.setPosition(50, 70);
+		table.setPosition(60 * columns, 70);
 		stage.addActor(table);
 
 		table.setDebug(true);
@@ -64,18 +68,16 @@ public class PlayScreen implements Screen {
 
 		skin.add("my_font", new BitmapFont(), BitmapFont.class);
 
-		// LabelStyle labelStyle = new LabelStyle(skin.getFont("my_font"), skin.getFont("my_font").getColor());
-		// Label label1 = new Label("AAAAAAAAAAAAAA", labelStyle);
+		LabelStyle labelStyle = new LabelStyle(skin.getFont("my_font"), skin.getFont("my_font").getColor());
+		Label label1 = new Label("Time", labelStyle);
 
-		// table.add(label1);
+		table.add(label1);
 
 		/* Load sound */
 		hit_sound = Gdx.audio.newSound(Gdx.files.internal("audio/hit.wav"));
 		miss_sound = Gdx.audio.newSound(Gdx.files.internal("audio/miss2.wav"));
 
 		/* Create 2D array of actors */
-		rows = 5;
-		columns = 5;
 		panties = new Panty[rows][columns];
 		selections = new int[2];
 		selectedPanties = new Panty[2];
