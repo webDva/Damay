@@ -22,7 +22,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 public class PlayScreen implements Screen {
 
 	private static final int PANTY_AREA = 48;
-	private static final int ASSETS_CREATED = 3;
+	private static final int ASSETS_CREATED = 5;
 
 	private static final int rows = 5;
 	private static final int columns = 5;
