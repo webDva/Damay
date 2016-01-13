@@ -5,12 +5,18 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class EndScreen implements Screen {
@@ -49,6 +55,24 @@ public class EndScreen implements Screen {
 		LabelStyle labelStyle = new LabelStyle(skin.getFont("my_font"), skin.getFont("my_font").getColor());
 		scoreLabel = new Label("Score", labelStyle);
 
+		skin.add("panty_image", new Texture(Gdx.files.internal("panty" + MathUtils.random(1, PlayScreen.ASSETS_CREATED) + ".png")));
+
+		TextButtonStyle buttonStyle = new TextButtonStyle(skin.getDrawable("panty_image"), skin.getDrawable("panty_image"), skin.getDrawable("panty_image"),
+				skin.getFont("my_font"));
+		final TextButton button = new TextButton("Retry", buttonStyle);
+
+		button.addListener(new ChangeListener() {
+
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				if (button.isPressed()) {
+					g.setScreen(new PlayScreen(batch, g));
+				}
+			}
+		});
+
+		table.add(button);
+		table.row();
 		table.add(scoreLabel);
 	}
 
@@ -92,6 +116,8 @@ public class EndScreen implements Screen {
 	@Override
 	public void dispose() {
 		stage.dispose();
+		batch.dispose();
+		skin.dispose();
 	}
 
 }
